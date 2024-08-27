@@ -12,6 +12,7 @@ pipeline {
             sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
                }
         }
+}
         stage('Terraform Init') {
             steps {
                 script {
