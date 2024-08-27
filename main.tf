@@ -31,23 +31,3 @@ module "firewall" {
   source    = "./modules/firewall"
   network   = "default"
 }
-
-output "instance_group_manager" {
-  value = module.instance_group.instance_group_manager
-}
-
-output "load_balancer_ip" {
-  value = module.load_balancer.global_address
-}
-
-variable "project_id" {
-  description = "The ID of the GCP project"
-}
-
-variable "region" {
-  description = "The region for the resources"
-}
-
-variable "zone" {
-  description = "The zone for the instance group"
-}
