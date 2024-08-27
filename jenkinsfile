@@ -4,7 +4,6 @@ pipeline {
         string(name: 'PROJECT_ID', defaultValue: '', description: 'GCP Project ID')
         string(name: 'REGION', defaultValue: '', description: 'GCP Region')
         string(name: 'ZONE', defaultValue: '', description: 'GCP Zone')
-        string(name: 'SERVICE_ACCOUNT_JSON', defaultValue: '', description: 'Path to GCP Service Account JSON')
     }
     stages {
       stage('GCP Cred'){
