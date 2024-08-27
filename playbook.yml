@@ -1,0 +1,14 @@
+- name: Configure Apache on MIG instances
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Ensure Apache is running
+      service:
+        name: apache2
+        state: started
+        enabled: yes
