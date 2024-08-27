@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'PROJECT_ID', defaultValue: '', description: 'GCP Project ID')
+        string(name: 'REGION', defaultValue: '', description: 'GCP Region')
+        string(name: 'ZONE', defaultValue: '', description: 'GCP Zone')
+        string(name: 'SERVICE_ACCOUNT_JSON', defaultValue: '', description: 'Path to GCP Service Account JSON')
+    }
+    stages {
+        stage('Terraform Init') {
+            steps {
+                script {
+                    sh 'terraform init'
+                }
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    sh """
+                    terraform apply -var="project_id=${params.PROJECT_ID}" \
+                                      -var="region=${params.REGION}" \
+                                      -var="zone=${params.ZONE}" \
+                                      -var="service_account_json=${params.SERVICE_ACCOUNT_JSON}" \
+                                      -auto-approve
+                    """
+                }
+            }
+        }
+        stage('Ansible Playbook') {
+            steps {
+                script {
+                    sh 'ansible-playbook playbook.yml'
+                }
+            }
+        }
+    }
+}
